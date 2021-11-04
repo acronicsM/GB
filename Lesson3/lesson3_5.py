@@ -19,9 +19,16 @@ def get_jokes(number_jokes, nouns_n, adverbs_n, adjectives_n):
     len_adverbs = len(adverbs_n)-1
     len_adjectives = len(adjectives_n)-1
     for i in range(number_jokes):
-        jokes_nouns = nouns[rnd(0, len_nouns)]
-        jokes_adverbs = adverbs[rnd(0, len_adverbs)]
-        jokes_adjectives = adjectives[rnd(0, len_adjectives)]
+        jokes_nouns, jokes_adverbs, jokes_adjectives = '', '', ''
+        if len_nouns > 0:
+            jokes_nouns = nouns_n[rnd(0, len_nouns)]
+
+        if len_adverbs > 0:
+            jokes_adverbs = adverbs_n[rnd(0, len_adverbs )]
+
+        if len_nouns > 0:
+            jokes_adjectives = adjectives_n[rnd(0, len_adjectives)]
+
         jokes.append(f'{jokes_nouns} {jokes_adverbs} {jokes_adjectives}')
 
     return jokes

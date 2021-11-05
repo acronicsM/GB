@@ -1,31 +1,23 @@
-def thesaurus(surname_dict_elem, name, surname):
-    letter_name = name[0]
-    name_surname = f'{name} {surname}'
-    elem_dict = surname_dict_elem.get(letter_name)
-    if elem_dict is None:
-        surname_dict_elem[letter_name] = [name_surname]
-    else:
-        elem_dict.append(name_surname)
-
-
 def thesaurus_adv(*args):
     surname_dict = dict()
-    for elem in args:
+    for elem in sorted(args):
         name, surname = elem.split()
         letter_surname = surname[0]
+        letter_name = name[0]
 
-        if surname_dict.get(letter_surname) is None:
-            surname_dict[letter_surname] = {}
-
-        thesaurus(surname_dict[letter_surname], name, surname)
+        elem_dict_s = surname_dict.get(letter_surname)
+        if elem_dict_s is None:
+            surname_dict[letter_surname] = {letter_name: [elem]}
+        else:
+            elem_dict_n = elem_dict_s.get(letter_name)
+            if elem_dict_n is None:
+                elem_dict_s[letter_name] = [elem]
+            else:
+                elem_dict_n.append(elem)
 
     new_dict = dict()
     for key_surname in sorted(surname_dict.keys()):
-        dict_name = dict()
-        for key_name in sorted(surname_dict[key_surname].keys()):
-            dict_name[key_name] = surname_dict[key_surname][key_name]
-
-        new_dict[key_surname] = dict_name
+        new_dict[key_surname] = surname_dict[key_surname]
 
     return new_dict
 
